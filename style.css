@@ -1,318 +1,352 @@
 /* ==========================================================
-   SESIÓN 2: CSS - ESTILOS, FLEXBOX, GRID Y DISEÑO RESPONSIVO
+   SESIÓN 2: NUEVO DISEÑO & PALETA ESMERALDA & CIAN OCÉANO
    ========================================================== */
 
-/* 1. Variables y Paleta de Colores Moderna */
+/* 1. Nueva Paleta de Colores y Tokens de Diseño */
 :root {
-    --color-primary: #4f46e5;
-    /* Índigo vibrante */
-    --color-primary-hover: #4338ca;
-    /* Índigo oscuro */
-    --color-bg-grad-1: #eef2ff;
-    /* Gradiente de fondo */
-    --color-bg-grad-2: #f8fafc;
-    --color-card: #ffffff;
-    --color-text-main: #0f172a;
-    /* Slate 900 */
-    --color-text-muted: #64748b;
-    /* Slate 500 */
-    --color-border: #cbd5e1;
-    /* Slate 300 */
-    --color-border-focus: #4f46e5;
+  /* Colores Principales (Emerald & Ocean Cyan) */
+  --color-primary: #0d9488;          /* Esmeralda / Teal 600 */
+  --color-primary-hover: #0f766e;    /* Esmeralda oscuro / Teal 700 */
+  --color-accent: #0284c7;           /* Cian Océano / Sky 600 */
+  --color-accent-gradient: linear-gradient(135deg, #0d9488 0%, #0284c7 100%);
+  
+  /* Fondos y Superficies */
+  --color-bg-base: #f8fafc;          /* Slate 50 */
+  --color-card-bg: #ffffff;
+  --color-input-bg: #f8fafc;
+  --color-input-focus-bg: #ffffff;
+  
+  /* Textos y Contrastes */
+  --color-text-title: #0f172a;       /* Slate 900 */
+  --color-text-body: #334155;        /* Slate 700 */
+  --color-text-muted: #64748b;       /* Slate 500 */
+  --color-border: #e2e8f0;          /* Slate 200 */
+  --color-border-hover: #cbd5e1;     /* Slate 300 */
+  
+  /* Estados de Validación */
+  --color-error: #f43f5e;            /* Rose 500 */
+  --color-error-bg: #fff1f2;         /* Rose 50 */
+  --color-error-border: #fda4af;     /* Rose 300 */
+  
+  --color-success: #10b981;          /* Emerald 500 */
+  --color-success-bg: #ecfdf5;       /* Emerald 50 */
+  --color-success-border: #a7f3d0;   /* Emerald 200 */
 
-    /* Estados de validación */
-    --color-error: #ef4444;
-    /* Rojo */
-    --color-error-bg: #fef2f2;
-    --color-success: #10b981;
-    /* Verde */
-    --color-success-bg: #f0fdf4;
-
-    /* Medidas y efectos */
-    --radius-card: 20px;
-    --radius-input: 10px;
-    --radius-btn: 12px;
-    --shadow-card: 0 20px 40px -15px rgba(79, 70, 229, 0.12), 0 10px 25px -10px rgba(15, 23, 42, 0.08);
-    --shadow-input-focus: 0 0 0 4px rgba(79, 70, 229, 0.15);
-    --transition-fast: all 0.25s ease-in-out;
+  /* Medidas y Sombras Premium */
+  --radius-card: 22px;
+  --radius-input: 12px;
+  --radius-btn: 14px;
+  --shadow-card: 0 20px 45px -15px rgba(15, 23, 42, 0.08), 0 10px 25px -10px rgba(13, 148, 136, 0.12);
+  --shadow-focus: 0 0 0 4px rgba(13, 148, 136, 0.16);
+  --transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* 2. Reseteo y Base */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background: linear-gradient(135deg, var(--color-bg-grad-1) 0%, var(--color-bg-grad-2) 100%);
-    color: var(--color-text-main);
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 24px 16px;
-    line-height: 1.5;
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--color-bg-base);
+  /* Fondo con iluminación radial multicapa */
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(13, 148, 136, 0.12) 0px, transparent 55%),
+    radial-gradient(at 100% 100%, rgba(2, 132, 199, 0.12) 0px, transparent 55%),
+    radial-gradient(at 50% 50%, rgba(241, 245, 249, 0.8) 0px, transparent 100%);
+  background-attachment: fixed;
+  color: var(--color-text-body);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 18px;
+  line-height: 1.6;
 }
 
 /* 3. Contenedor Principal con Flexbox */
 .contenedor-principal {
-    width: 100%;
-    max-width: 680px;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  max-width: 690px;
+  display: flex;
+  justify-content: center;
 }
 
 /* 4. Tarjeta del Formulario */
 .tarjeta-formulario {
-    background-color: var(--color-card);
-    width: 100%;
-    border-radius: var(--radius-card);
-    padding: 40px 36px;
-    box-shadow: var(--shadow-card);
-    border: 1px solid rgba(203, 213, 225, 0.6);
-    position: relative;
-    overflow: hidden;
+  background-color: var(--color-card-bg);
+  width: 100%;
+  border-radius: var(--radius-card);
+  padding: 44px 40px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
 }
 
-/* Decoración superior sutil */
+/* Barra de Acento Superior con Degradado Tri-color */
 .tarjeta-formulario::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(90deg, #4f46e5, #06b6d4, #10b981);
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #14b8a6 0%, #0284c7 50%, #6366f1 100%);
 }
 
-/* 5. Encabezado */
+/* 5. Encabezado del Formulario */
 .formulario-encabezado {
-    text-align: center;
-    margin-bottom: 28px;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 .formulario-titulo {
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--color-text-main);
-    letter-spacing: -0.5px;
-    margin-bottom: 8px;
+  font-size: 2.1rem;
+  font-weight: 700;
+  letter-spacing: -0.6px;
+  margin-bottom: 8px;
+  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .formulario-subtitulo {
-    color: var(--color-text-muted);
-    font-size: 0.95rem;
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+  font-weight: 400;
 }
 
-/* 6. Alerta Global */
+/* 6. Alerta Global de Estado */
 .alerta {
-    padding: 14px 18px;
-    border-radius: 10px;
-    margin-bottom: 24px;
-    font-size: 0.95rem;
-    font-weight: 500;
-    display: flex;
-    align-items: center;
-    transition: var(--transition-fast);
+  padding: 15px 20px;
+  border-radius: var(--radius-input);
+  margin-bottom: 24px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: var(--transition);
+  animation: deslizarAbajo 0.3s ease;
+}
+
+@keyframes deslizarAbajo {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .alerta.oculto {
-    display: none;
+  display: none;
 }
 
 .alerta.exito {
-    background-color: var(--color-success-bg);
-    color: #065f46;
-    border: 1px solid #a7f3d0;
+  background-color: var(--color-success-bg);
+  color: #065f46;
+  border: 1.5px solid var(--color-success-border);
 }
 
 .alerta.error {
-    background-color: var(--color-error-bg);
-    color: #991b1b;
-    border: 1px solid #fecaca;
+  background-color: var(--color-error-bg);
+  color: #9f1239;
+  border: 1.5px solid var(--color-error-border);
 }
 
 /* 7. Grid del Formulario (CSS GRID) */
 .formulario-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 18px;
 }
 
 .campo-ancho-completo {
-    grid-column: span 2;
+  grid-column: span 2;
 }
 
-/* 8. Grupos de Campos (Labels e Inputs) */
+/* 8. Grupos de Campos e Inputs */
 .form-group {
-    display: flex;
-    flex-direction: column;
-    position: relative;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 }
 
 .form-group label {
-    font-size: 0.88rem;
-    font-weight: 600;
-    color: var(--color-text-main);
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-text-title);
+  margin-bottom: 7px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .requerido {
-    color: var(--color-error);
-    font-size: 0.95rem;
+  color: var(--color-error);
+  font-size: 0.95rem;
 }
 
-/* Inputs y Selects */
+/* Inputs y Selects Estilizados */
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="tel"],
 .form-group input[type="number"],
 .form-group input[type="password"],
 .form-group select {
-    width: 100%;
-    padding: 12px 14px;
-    font-size: 0.95rem;
-    font-family: inherit;
-    color: var(--color-text-main);
-    background-color: #ffffff;
-    border: 1.5px solid var(--color-border);
-    border-radius: var(--radius-input);
-    outline: none;
-    transition: var(--transition-fast);
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--color-text-title);
+  background-color: var(--color-input-bg);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-input);
+  outline: none;
+  transition: var(--transition);
+}
+
+.form-group input:hover,
+.form-group select:hover {
+  border-color: var(--color-border-hover);
+  background-color: #ffffff;
 }
 
 .form-group input::placeholder,
 .form-group select:invalid {
-    color: #94a3b8;
+  color: #94a3b8;
 }
 
-/* Estados de Focus */
+/* Enfoque Luminoso Esmeralda */
 .form-group input:focus,
 .form-group select:focus {
-    border-color: var(--color-border-focus);
-    box-shadow: var(--shadow-input-focus);
+  background-color: var(--color-input-focus-bg);
+  border-color: var(--color-primary);
+  box-shadow: var(--shadow-focus);
 }
 
-/* 9. Estados de Validación Dinámicos (Clases gestionadas con JS) */
+/* 9. Estados de Validación Reactivos */
 .form-group.error input,
 .form-group.error select {
-    border-color: var(--color-error) !important;
-    background-color: var(--color-error-bg);
+  border-color: var(--color-error) !important;
+  background-color: var(--color-error-bg);
 }
 
 .form-group.error input:focus,
 .form-group.error select:focus {
-    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+  box-shadow: 0 0 0 4px rgba(244, 63, 94, 0.18);
 }
 
 .form-group.success input,
 .form-group.success select {
-    border-color: var(--color-success);
-    background-color: var(--color-success-bg);
+  border-color: var(--color-success);
+  background-color: var(--color-success-bg);
 }
 
 .mensaje-error {
-    color: var(--color-error);
-    font-size: 0.82rem;
-    font-weight: 500;
-    margin-top: 5px;
-    min-height: 18px;
-    display: block;
-    transition: var(--transition-fast);
+  color: var(--color-error);
+  font-size: 0.82rem;
+  font-weight: 500;
+  margin-top: 5px;
+  min-height: 18px;
+  display: block;
+  transition: var(--transition);
 }
 
 /* 10. Checkbox de Términos (Flexbox) */
 .terminos-group {
-    margin-top: 4px;
+  margin-top: 6px;
 }
 
 .checkbox-container {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    user-select: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+  user-select: none;
 }
 
 .checkbox-container input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    accent-color: var(--color-primary);
-    cursor: pointer;
+  width: 19px;
+  height: 19px;
+  margin-top: 2px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
 }
 
 .checkbox-container a {
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 600;
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
 }
 
 .checkbox-container a:hover {
-    text-decoration: underline;
+  color: var(--color-accent);
+  text-decoration: underline;
 }
 
-/* 11. Botón de Envío */
+/* 11. Botón de Envío con Gradiente Interactivo */
 .btn-enviar {
-    width: 100%;
-    padding: 14px 24px;
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
-    color: #ffffff;
-    border: none;
-    border-radius: var(--radius-btn);
-    font-size: 1.05rem;
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-    transition: var(--transition-fast);
-    box-shadow: 0 10px 20px -8px rgba(79, 70, 229, 0.4);
-    margin-top: 8px;
+  width: 100%;
+  padding: 15px 28px;
+  background: var(--color-accent-gradient);
+  color: #ffffff;
+  border: none;
+  border-radius: var(--radius-btn);
+  font-size: 1.05rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  transition: var(--transition);
+  box-shadow: 0 12px 24px -8px rgba(13, 148, 136, 0.42);
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .btn-enviar:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 14px 24px -6px rgba(79, 70, 229, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 28px -6px rgba(13, 148, 136, 0.52);
+  filter: brightness(1.05);
 }
 
 .btn-enviar:active {
-    transform: translateY(0);
+  transform: translateY(0);
 }
 
 .btn-enviar:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-    transform: none;
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-/* 12. Diseño Adaptable (Responsive Design con Media Query) */
+/* 12. Diseño Adaptable (Responsive con Media Query) */
 @media (max-width: 640px) {
-    body {
-        padding: 16px 12px;
-    }
+  body {
+    padding: 16px 12px;
+  }
 
-    .tarjeta-formulario {
-        padding: 28px 20px;
-        border-radius: 16px;
-    }
+  .tarjeta-formulario {
+    padding: 30px 22px;
+    border-radius: 18px;
+  }
 
-    .formulario-titulo {
-        font-size: 1.6rem;
-    }
+  .formulario-titulo {
+    font-size: 1.7rem;
+  }
 
-    /* Cambiar Grid de 2 columnas a 1 columna en pantallas móviles */
-    .formulario-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
+  /* Pasar a 1 sola columna en dispositivos móviles */
+  .formulario-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 
-    .campo-ancho-completo {
-        grid-column: span 1;
-    }
+  .campo-ancho-completo {
+    grid-column: span 1;
+  }
 }
