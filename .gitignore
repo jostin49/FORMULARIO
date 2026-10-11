@@ -1,0 +1,7 @@
+# Dependencias y archivos del sistema
+.DS_Store
+Thumbs.db
+node_modules/
+.vscode/
+.idea/
+*.log
