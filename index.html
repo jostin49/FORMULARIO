@@ -1,1 +1,128 @@
-<!-- Sesión 1: HTML5 - Formulario Web -->
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Registro - Práctica Web</title>
+
+    <!-- Tipografía moderna Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Vinculación de la hoja de estilos CSS (Sesión 2) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <main class="contenedor-principal">
+        <section class="tarjeta-formulario">
+
+            <!-- Encabezado del Formulario -->
+            <header class="formulario-encabezado">
+                <h1 class="formulario-titulo">Crea tu Cuenta</h1>
+                <p class="formulario-subtitulo">Completa los siguientes campos para registrarte en la plataforma.</p>
+            </header>
+
+            <!-- Mensaje global de estado/alerta -->
+            <div id="alertaGlobal" class="alerta oculto" role="alert" aria-live="polite"></div>
+
+            <!-- Formulario principal con atributos semánticos HTML5 -->
+            <form id="formularioRegistro" novalidate autocomplete="off">
+                <div class="formulario-grid">
+
+                    <!-- Campo 1: Nombre Completo (Texto) -->
+                    <div class="form-group campo-ancho-completo" id="grupo-nombre">
+                        <label for="nombre">Nombre completo <span class="requerido">*</span></label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos Pérez" required
+                            minlength="3" maxlength="50" autocomplete="name">
+                        <small class="mensaje-error" id="error-nombre"></small>
+                    </div>
+
+                    <!-- Campo 2: Correo Electrónico (Email) -->
+                    <div class="form-group" id="grupo-correo">
+                        <label for="correo">Correo electrónico <span class="requerido">*</span></label>
+                        <input type="email" id="correo" name="correo" placeholder="ejemplo@correo.com" required
+                            autocomplete="email">
+                        <small class="mensaje-error" id="error-correo"></small>
+                    </div>
+
+                    <!-- Campo 3: Teléfono Celular (Tel / Pattern) -->
+                    <div class="form-group" id="grupo-telefono">
+                        <label for="telefono">Teléfono celular <span class="requerido">*</span></label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Ej. 0991234567 (10 dígitos)"
+                            required pattern="[0-9]{10}" maxlength="10" autocomplete="tel">
+                        <small class="mensaje-error" id="error-telefono"></small>
+                    </div>
+
+                    <!-- Campo 4: Edad (Number / Min-Max) -->
+                    <div class="form-group" id="grupo-edad">
+                        <label for="edad">Edad <span class="requerido">*</span></label>
+                        <input type="number" id="edad" name="edad" placeholder="Mínimo 18" required min="18" max="120">
+                        <small class="mensaje-error" id="error-edad"></small>
+                    </div>
+
+                    <!-- Campo 5: Ciudad / Select -->
+                    <div class="form-group" id="grupo-ciudad">
+                        <label for="ciudad">Ciudad de residencia <span class="requerido">*</span></label>
+                        <select id="ciudad" name="ciudad" required>
+                            <option value="" disabled selected>Selecciona tu ciudad...</option>
+                            <option value="Quito">Quito</option>
+                            <option value="Guayaquil">Guayaquil</option>
+                            <option value="Cuenca">Cuenca</option>
+                            <option value="Santo Domingo">Santo Domingo</option>
+                            <option value="Ambato">Ambato</option>
+                            <option value="Otra">Otra ciudad</option>
+                        </select>
+                        <small class="mensaje-error" id="error-ciudad"></small>
+                    </div>
+
+                    <!-- Campo 6: Contraseña (Password / Minlength) -->
+                    <div class="form-group" id="grupo-password">
+                        <label for="password">Contraseña <span class="requerido">*</span></label>
+                        <input type="password" id="password" name="password"
+                            placeholder="Mínimo 8 caracteres (letras y números)" required minlength="8"
+                            autocomplete="new-password">
+                        <small class="mensaje-error" id="error-password"></small>
+                    </div>
+
+                    <!-- Campo 7: Confirmar Contraseña (Password) -->
+                    <div class="form-group" id="grupo-confirmPassword">
+                        <label for="confirmPassword">Confirmar contraseña <span class="requerido">*</span></label>
+                        <input type="password" id="confirmPassword" name="confirmPassword"
+                            placeholder="Repite la contraseña" required minlength="8" autocomplete="new-password">
+                        <small class="mensaje-error" id="error-confirmPassword"></small>
+                    </div>
+
+                    <!-- Campo 8: Términos y condiciones (Checkbox) -->
+                    <div class="form-group campo-ancho-completo terminos-group" id="grupo-terminos">
+                        <label class="checkbox-container">
+                            <input type="checkbox" id="terminos" name="terminos" required>
+                            <span class="checkmark"></span>
+                            <span class="texto-terminos">Acepto los <a href="#" onclick="return false;">términos y
+                                    condiciones</a> y las políticas de privacidad. <span
+                                    class="requerido">*</span></span>
+                        </label>
+                        <small class="mensaje-error" id="error-terminos"></small>
+                    </div>
+
+                    <!-- Botón de Envío (Button) -->
+                    <div class="campo-ancho-completo">
+                        <button type="submit" id="btnSubmit" class="btn-enviar">
+                            <span class="btn-texto">Registrarse</span>
+                        </button>
+                    </div>
+
+                </div>
+            </form>
+
+        </section>
+    </main>
+
+    <!-- Vinculación del script JavaScript (Sesión 3) -->
+    <script src="script.js" defer></script>
+</body>
+
+</html>
