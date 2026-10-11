@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const regexTexto = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
   const regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const regexTelefono = /^[0-9]{10}$/;
-  const regexPassword = /^(?=.[A-Za-z])(?=.\d).{8,}$/; // Mínimo 8 caracteres, al menos 1 letra y 1 número
+  const regexPassword = /^(?=.*[A-Za-z])(?=.*\d).{8,}$/; // Mínimo 8 caracteres, al menos 1 letra y 1 número
 
   // 3. Funciones de Feedback Visual (Mostrar/Limpiar Estados)
   
@@ -272,7 +272,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnSubmit.querySelector('.btn-texto').textContent = 'Procesando registro...';
 
     alertaGlobal.className = 'alerta exito';
-    alertaGlobal.textContent = 🎉 ¡Registro exitoso, ${inputs.nombre.value.trim()}! Tus datos han sido validados correctamente.;
+    alertaGlobal.textContent = `🎉 ¡Registro exitoso, ${inputs.nombre.value.trim()}! Tus datos han sido validados correctamente.`;
     alertaGlobal.classList.remove('oculto');
 
     // Desplazar vista a la alerta
@@ -287,4 +287,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 2500);
   });
 
-});// Sesión 3: JavaScript y Validaciones
+});
