@@ -1,1 +1,318 @@
-/* Sesión 2: CSS - Estilos y Diseño Adaptable */
+/* ==========================================================
+   SESIÓN 2: CSS - ESTILOS, FLEXBOX, GRID Y DISEÑO RESPONSIVO
+   ========================================================== */
+
+/* 1. Variables y Paleta de Colores Moderna */
+:root {
+    --color-primary: #4f46e5;
+    /* Índigo vibrante */
+    --color-primary-hover: #4338ca;
+    /* Índigo oscuro */
+    --color-bg-grad-1: #eef2ff;
+    /* Gradiente de fondo */
+    --color-bg-grad-2: #f8fafc;
+    --color-card: #ffffff;
+    --color-text-main: #0f172a;
+    /* Slate 900 */
+    --color-text-muted: #64748b;
+    /* Slate 500 */
+    --color-border: #cbd5e1;
+    /* Slate 300 */
+    --color-border-focus: #4f46e5;
+
+    /* Estados de validación */
+    --color-error: #ef4444;
+    /* Rojo */
+    --color-error-bg: #fef2f2;
+    --color-success: #10b981;
+    /* Verde */
+    --color-success-bg: #f0fdf4;
+
+    /* Medidas y efectos */
+    --radius-card: 20px;
+    --radius-input: 10px;
+    --radius-btn: 12px;
+    --shadow-card: 0 20px 40px -15px rgba(79, 70, 229, 0.12), 0 10px 25px -10px rgba(15, 23, 42, 0.08);
+    --shadow-input-focus: 0 0 0 4px rgba(79, 70, 229, 0.15);
+    --transition-fast: all 0.25s ease-in-out;
+}
+
+/* 2. Reseteo y Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(135deg, var(--color-bg-grad-1) 0%, var(--color-bg-grad-2) 100%);
+    color: var(--color-text-main);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    line-height: 1.5;
+}
+
+/* 3. Contenedor Principal con Flexbox */
+.contenedor-principal {
+    width: 100%;
+    max-width: 680px;
+    display: flex;
+    justify-content: center;
+}
+
+/* 4. Tarjeta del Formulario */
+.tarjeta-formulario {
+    background-color: var(--color-card);
+    width: 100%;
+    border-radius: var(--radius-card);
+    padding: 40px 36px;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(203, 213, 225, 0.6);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Decoración superior sutil */
+.tarjeta-formulario::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #4f46e5, #06b6d4, #10b981);
+}
+
+/* 5. Encabezado */
+.formulario-encabezado {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+.formulario-titulo {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+}
+
+.formulario-subtitulo {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+}
+
+/* 6. Alerta Global */
+.alerta {
+    padding: 14px 18px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    transition: var(--transition-fast);
+}
+
+.alerta.oculto {
+    display: none;
+}
+
+.alerta.exito {
+    background-color: var(--color-success-bg);
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.alerta.error {
+    background-color: var(--color-error-bg);
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+/* 7. Grid del Formulario (CSS GRID) */
+.formulario-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 18px;
+}
+
+.campo-ancho-completo {
+    grid-column: span 2;
+}
+
+/* 8. Grupos de Campos (Labels e Inputs) */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.form-group label {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--color-text-main);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.requerido {
+    color: var(--color-error);
+    font-size: 0.95rem;
+}
+
+/* Inputs y Selects */
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="tel"],
+.form-group input[type="number"],
+.form-group input[type="password"],
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: var(--color-text-main);
+    background-color: #ffffff;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-input);
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+.form-group input::placeholder,
+.form-group select:invalid {
+    color: #94a3b8;
+}
+
+/* Estados de Focus */
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--color-border-focus);
+    box-shadow: var(--shadow-input-focus);
+}
+
+/* 9. Estados de Validación Dinámicos (Clases gestionadas con JS) */
+.form-group.error input,
+.form-group.error select {
+    border-color: var(--color-error) !important;
+    background-color: var(--color-error-bg);
+}
+
+.form-group.error input:focus,
+.form-group.error select:focus {
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15);
+}
+
+.form-group.success input,
+.form-group.success select {
+    border-color: var(--color-success);
+    background-color: var(--color-success-bg);
+}
+
+.mensaje-error {
+    color: var(--color-error);
+    font-size: 0.82rem;
+    font-weight: 500;
+    margin-top: 5px;
+    min-height: 18px;
+    display: block;
+    transition: var(--transition-fast);
+}
+
+/* 10. Checkbox de Términos (Flexbox) */
+.terminos-group {
+    margin-top: 4px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    user-select: none;
+}
+
+.checkbox-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.checkbox-container a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.checkbox-container a:hover {
+    text-decoration: underline;
+}
+
+/* 11. Botón de Envío */
+.btn-enviar {
+    width: 100%;
+    padding: 14px 24px;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-btn);
+    font-size: 1.05rem;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: var(--transition-fast);
+    box-shadow: 0 10px 20px -8px rgba(79, 70, 229, 0.4);
+    margin-top: 8px;
+}
+
+.btn-enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 24px -6px rgba(79, 70, 229, 0.5);
+}
+
+.btn-enviar:active {
+    transform: translateY(0);
+}
+
+.btn-enviar:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 12. Diseño Adaptable (Responsive Design con Media Query) */
+@media (max-width: 640px) {
+    body {
+        padding: 16px 12px;
+    }
+
+    .tarjeta-formulario {
+        padding: 28px 20px;
+        border-radius: 16px;
+    }
+
+    .formulario-titulo {
+        font-size: 1.6rem;
+    }
+
+    /* Cambiar Grid de 2 columnas a 1 columna en pantallas móviles */
+    .formulario-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .campo-ancho-completo {
+        grid-column: span 1;
+    }
+}
